@@ -11,7 +11,7 @@ public class Driver {
 			for(int i=0;i<13;i++){
 				hand.addCard(deck.removeCardOnTop());
 			}			
-			hand.sortCards();
+			hand.evaluate();
 			System.out.println(hand);
 	}
 

@@ -23,7 +23,7 @@ public class RummyHand extends Hand{
 	public void sortCards(){
 		Collections.sort(cardsInHand);
 	}
-	
+
 	public void convertToSequenceMap(){
 		String sequence = "";
 		for(Card c: cardsInHand){
@@ -41,11 +41,13 @@ public class RummyHand extends Hand{
 		}
 	}
 	
+
 	public int evaluate(){
 		sortCards();
 		convertToSequenceMap();
 		System.out.println(sequenceInSuit);
 		return 0;
 	}
+
 	
 }

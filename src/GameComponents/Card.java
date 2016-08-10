@@ -29,6 +29,8 @@ public class Card implements Comparable{
 		switch (displayValue) {
 		case "A":
 			return 1;
+		case "T":
+			return 10;
 		case "J":
 			return 11;
 		case "Q":
@@ -46,6 +48,8 @@ public class Card implements Comparable{
 		switch (value) {
 		case 1:
 			return "A";
+		case 10:
+			return "T";
 		case 11:
 			return "J";
 		case 12:

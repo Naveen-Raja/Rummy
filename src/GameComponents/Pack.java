@@ -5,7 +5,7 @@ public class Pack {
 	
 	ArrayList<Card> cardsInPack;
 	private final String[] suits  = {"SPADE","DIAMOND","CLUB","HEART"};
-	private final String[] values = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+	private final String[] values = {"A","2","3","4","5","6","7","8","9","T","J","Q","K"};
 	
 	public Pack(int jokerCount){
 		

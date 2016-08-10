@@ -35,6 +35,8 @@ public class Card implements Comparable{
 			return 12;
 		case "K":
 			return 13;
+		case "0":
+			return 0;
 		default:
 			return Integer.parseInt(displayValue);
 		}

@@ -2,7 +2,7 @@ package GameComponents;
 import java.util.ArrayList;
 
 public abstract class Hand {
-	ArrayList<Card> cardsInHand;
+	protected ArrayList<Card> cardsInHand;
 
 	public void addCard(Card c) {
 		cardsInHand.add(c);

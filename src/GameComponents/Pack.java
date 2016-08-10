@@ -18,7 +18,7 @@ public class Pack {
 		}	
 		
 		for(int i=0; i < jokerCount; ++i){
-			cardsInPack.add(new Card("JOKER","0"));
+			cardsInPack.add(new Card("0","*"));
 		}
 	}
 

@@ -23,5 +23,29 @@ public class RummyHand extends Hand{
 		
 		return 0;
 	}
+    
+	public ArrayList<String> getSequences(){
+		ArrayList<String> sequencesInHand=new ArrayList<String>();
+		
+	    ArrayList<String> sequenceOfThree=isSequence(3);
+//		for(Card c:cardsInHand){
+//			System.out.println("Check");
+//			System.out.println(c.getDisplayValue());
+//		}
+		
+		return null;
+		
+	}
+
+	private ArrayList<String> isSequence(int n) {
+		int start=0;
+		String subString="";
+		for(int i=0;i<start+3;i++)
+		   subString+=cardsInHand.get(i).getDisplayValue();
+		
+		System.out.println(subString);
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

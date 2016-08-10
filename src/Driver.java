@@ -12,7 +12,7 @@ public class Driver {
 				hand.addCard(deck.removeCardOnTop());
 			}			
 			hand.sortCards();
-			System.out.println(hand);
+			hand.getSequences();
 	}
 
 }

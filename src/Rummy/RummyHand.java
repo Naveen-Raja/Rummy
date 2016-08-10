@@ -17,33 +17,25 @@ public class RummyHand extends Hand{
 	public void sortCards(){
 		Collections.sort(cardsInHand);
 	}
-	
-	public int evaluate(){
-		sortCards();
-		
-		return 0;
-	}
     
 	public ArrayList<String> getSequences(){
 		ArrayList<String> sequencesInHand=new ArrayList<String>();
 		
-	    ArrayList<String> sequenceOfThree=isSequence(3);
-//		for(Card c:cardsInHand){
-//			System.out.println("Check");
-//			System.out.println(c.getDisplayValue());
-//		}
-		
+	    ArrayList<String> sequenceOfThree=isSequence(3);	
 		return null;
 		
 	}
 
 	private ArrayList<String> isSequence(int n) {
 		int start=0;
+		ArrayList<String> seq=new ArrayList<String>();
 		String subString="";
 		for(int i=0;i<start+3;i++)
 		   subString+=cardsInHand.get(i).getDisplayValue();
 		
-		System.out.println(subString);
+		if(possibleSequence.contains(subString)){
+			
+		}
 		// TODO Auto-generated method stub
 		return null;
 	}

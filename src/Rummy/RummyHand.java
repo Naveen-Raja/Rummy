@@ -70,34 +70,62 @@ public class RummyHand extends Hand {
 
 	public void getSequences() {
 		for (String suit : sequenceInSuit.keySet()) {
-			String result = subString(possibleSequence, sequenceInSuit.get(suit));
-			if (result.length() >= 3)
-				sequences.add(suit + " " + result);
+			Set<String> result = subString(possibleSequence, sequenceInSuit.get(suit));
+	        for(String s:result){
+	        	if(s.length()>=2)
+	    			sequences.add(suit + " " + s);
+	        }
 		}
 	}
 
-	public String subString(String str1, String str2) {
-		int l1 = str1.length();
-		int l2 = str2.length();
+	public static Set<String> subString(String s, String t) {
+	    int[][] table = new int[s.length()][t.length()];
+	    int longest = 0;
+	    Set<String> result = new HashSet<>();
 
-		int[][] arr = new int[l1 + 1][l2 + 1];
-		int len = 0, pos = -1;
+	    for (int i = 0; i < s.length(); i++) {
+	        for (int j = 0; j < t.length(); j++) {
+	            if (s.charAt(i) != t.charAt(j)) {
+	                continue;
+	            }
 
-		for (int x = 1; x < l1 + 1; x++) {
-			for (int y = 1; y < l2 + 1; y++) {
-				if (str1.charAt(x - 1) == str2.charAt(y - 1)) {
-					arr[x][y] = arr[x - 1][y - 1] + 1;
-					if (arr[x][y] > len) {
-						len = arr[x][y];
-						pos = x;
-					}
-				} else
-					arr[x][y] = 0;
-			}
-		}
-
-		return str1.substring(pos - len, pos);
+	            table[i][j] = (i == 0 || j == 0) ? 1
+	                                             : 1 + table[i - 1][j - 1];
+	            if (table[i][j] > longest) {
+	                longest = table[i][j];
+	                result.clear();
+	            }
+	            if (table[i][j] == longest) {
+	                result.add(s.substring(i - longest + 1, i + 1));
+	            }
+	        }
+	    }
+	    return result;
 	}
+	
+	
+//	public String subString(String str1, String str2) {
+//		int l1 = str1.length();
+//		int l2 = str2.length();
+//
+//		int[][] arr = new int[l1 + 1][l2 + 1];
+//		int len = 0, pos = -1;
+//
+//		for (int x = 1; x < l1 + 1; x++) {
+//			for (int y = 1; y < l2 + 1; y++) {
+//				if (str1.charAt(x - 1) == str2.charAt(y - 1)) {
+//					arr[x][y] = arr[x - 1][y - 1] + 1;
+//					if (arr[x][y] > len) {
+//						len = arr[x][y];
+//						pos = x;
+//					}
+//				} else
+//					arr[x][y] = 0;
+//			}
+//		}
+//
+//		return str1.substring(pos - len, pos);
+//	}
 
 	public void convertToSet() {
 		Set<String> list = new HashSet<>();
@@ -184,6 +212,7 @@ public class RummyHand extends Hand {
 		convertToSequenceMap();
 		getSequences();
 		System.out.println(sequenceInSuit);
+		System.out.println("Sequences: ");
 		for (String s : sequences)
 			System.out.println(s);
 		convertToSet();

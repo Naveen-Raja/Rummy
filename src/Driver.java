@@ -16,10 +16,10 @@ public class Driver {
 			hand.addCard(new Card("A","SPADE"));
 			hand.addCard(new Card("K","SPADE"));
 			hand.addCard(new Card("Q","SPADE"));
-			hand.addCard(new Card("J","SPADE"));
+			hand.addCard(new Card("6","SPADE"));
 			hand.addCard(new Card("T","HEART"));
 			hand.addCard(new Card("T","DIAMOND"));
-			hand.addCard(new Card("5","SPADE"));
+			hand.addCard(new Card("8","SPADE"));
 			hand.addCard(new Card("6","CLUB"));
 			hand.addCard(new Card("6","HEART"));
 			hand.addCard(new Card("6","DIAMONS"));

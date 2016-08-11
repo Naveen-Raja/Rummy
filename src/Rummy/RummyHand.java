@@ -71,61 +71,41 @@ public class RummyHand extends Hand {
 	public void getSequences() {
 		for (String suit : sequenceInSuit.keySet()) {
 			Set<String> result = subString(possibleSequence, sequenceInSuit.get(suit));
-	        for(String s:result){
-	        	if(s.length()>=2)
-	    			sequences.add(suit + " " + s);
-	        }
+			for(String s:result){
+				if(s.length()>=2)
+					sequences.add(suit + " " + s);
+			}
 		}
 	}
 
-	public static Set<String> subString(String s, String t) {
-	    int[][] table = new int[s.length()][t.length()];
-	    int longest = 0;
-	    Set<String> result = new HashSet<>();
-
-	    for (int i = 0; i < s.length(); i++) {
-	        for (int j = 0; j < t.length(); j++) {
-	            if (s.charAt(i) != t.charAt(j)) {
-	                continue;
-	            }
-
-	            table[i][j] = (i == 0 || j == 0) ? 1
-	                                             : 1 + table[i - 1][j - 1];
-	            if (table[i][j] > longest) {
-	                longest = table[i][j];
-	                result.clear();
-	            }
-	            if (table[i][j] == longest) {
-	                result.add(s.substring(i - longest + 1, i + 1));
-	            }
-	        }
-	    }
-	    return result;
+	public void removeFromList(String s){
+		
 	}
 	
-	
-//	public String subString(String str1, String str2) {
-//		int l1 = str1.length();
-//		int l2 = str2.length();
-//
-//		int[][] arr = new int[l1 + 1][l2 + 1];
-//		int len = 0, pos = -1;
-//
-//		for (int x = 1; x < l1 + 1; x++) {
-//			for (int y = 1; y < l2 + 1; y++) {
-//				if (str1.charAt(x - 1) == str2.charAt(y - 1)) {
-//					arr[x][y] = arr[x - 1][y - 1] + 1;
-//					if (arr[x][y] > len) {
-//						len = arr[x][y];
-//						pos = x;
-//					}
-//				} else
-//					arr[x][y] = 0;
-//			}
-//		}
-//
-//		return str1.substring(pos - len, pos);
-//	}
+	public static Set<String> subString(String s, String t) {
+		int[][] table = new int[s.length()][t.length()];
+		int longest = 0;
+		Set<String> result = new HashSet<>();
+
+		for (int i = 0; i < s.length(); i++) {
+			for (int j = 0; j < t.length(); j++) {
+				if (s.charAt(i) != t.charAt(j)) {
+					continue;
+				}
+
+				table[i][j] = (i == 0 || j == 0) ? 1
+						: 1 + table[i - 1][j - 1];
+				if (table[i][j] > longest) {
+					longest = table[i][j];
+					result.clear();
+				}
+				if (table[i][j] == longest) {
+					result.add(s.substring(i - longest + 1, i + 1));
+				}
+			}
+		}
+		return result;
+	}
 
 	public void convertToSet() {
 		Set<String> list = new HashSet<>();
@@ -184,28 +164,74 @@ public class RummyHand extends Hand {
 		}
 
 
-	   System.out.println("Set of 4: ");
-	   System.out.println(setOf4);
-	   System.out.println("Set of 3: ");
-	   System.out.println(setOf3);
-	   System.out.println("Set of 2: ");
-	   System.out.println(setOf2);
-	   System.out.println("Singles: ");
-	   System.out.println(single);
-	  
+		System.out.println("Set of 4: ");
+		System.out.println(setOf4);
+		System.out.println("Set of 3: ");
+		System.out.println(setOf3);
+		System.out.println("Set of 2: ");
+		System.out.println(setOf2);
+		System.out.println("Singles: ");
+		System.out.println(single);
+
+		completeSets();
 	}
 
-    public void assignJokers(Card Joker){
-    	ArrayList<Card> valuesToRemove=new ArrayList<Card>(); // To avoid ConcurrentModificationException
-    	for(Card c:cardsInHand){
-    		if(c.isSameValue(Joker)){
-    			valuesToRemove.add(c);
-    			availableJokers++;
-    		}
-    	}
-    	cardsInHand.removeAll(valuesToRemove);
-    }
-    
+	public void completeSets(){
+		
+		//setOf2.add("5 DIAMOND 5 HEART");
+		for(String set:setOf2){
+			
+			System.out.println("Completing Set : "+set);
+			
+			for(String seq:sequences){
+				String splitSeq[]=seq.split("\\s");
+				int posInSeq=splitSeq[1].indexOf(set.charAt(0));
+				
+				System.out.println(splitSeq[0]+" "+splitSeq[1]+" "+posInSeq);
+				if((posInSeq-0) >=3){
+					if(!set.contains(splitSeq[0])){
+						String newSeq =splitSeq[0]+" "+splitSeq[1].substring(0,posInSeq-1);
+						setOf2.remove(set);
+						set+=" "+splitSeq[1].charAt(posInSeq)+" "+splitSeq[0];
+						sequences.remove(seq);
+						sequences.add(newSeq);
+						setOf3.add(set);
+						
+						System.out.println(newSeq);
+						System.out.println(set);
+						
+						
+					}
+				}
+				else if((splitSeq[1].length()-1)-posInSeq >= 3){
+					if(!set.contains(splitSeq[0])){
+						String newSeq = splitSeq[1].substring(posInSeq+1,splitSeq[1].length());
+						setOf2.remove(set);
+						set+=" "+splitSeq[1].charAt(posInSeq)+" "+splitSeq[0];
+						sequences.remove(seq);
+						sequences.add(newSeq);
+						setOf3.add(set);
+						
+						System.out.println(newSeq);
+						System.out.println(set);
+						
+					} 
+				}
+			}
+		}
+	}
+
+	public void assignJokers(Card Joker){
+		ArrayList<Card> valuesToRemove=new ArrayList<Card>(); // To avoid ConcurrentModificationException
+		for(Card c:cardsInHand){
+			if(c.isSameValue(Joker)){
+				valuesToRemove.add(c);
+				availableJokers++;
+			}
+		}
+		cardsInHand.removeAll(valuesToRemove);
+	}
+
 	public int evaluate(Card joker){
 		assignJokers(joker);
 		sortCards();
@@ -219,5 +245,5 @@ public class RummyHand extends Hand {
 		System.out.println("Joker Count: "+availableJokers);
 		return 0;
 	}
-	
+
 }

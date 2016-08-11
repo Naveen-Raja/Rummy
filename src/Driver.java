@@ -13,12 +13,12 @@ public class Driver {
 //			for(int i=0;i<13;i++){
 //				hand.addCard(deck.removeCardOnTop());
 //			}	
-			hand.addCard(new Card("A","SPADE"));
-			hand.addCard(new Card("K","SPADE"));
-			hand.addCard(new Card("Q","SPADE"));
-			hand.addCard(new Card("6","SPADE"));
-			hand.addCard(new Card("T","HEART"));
-			hand.addCard(new Card("T","DIAMOND"));
+			hand.addCard(new Card("2","SPADE"));
+			hand.addCard(new Card("3","SPADE"));
+			hand.addCard(new Card("4","SPADE"));
+			hand.addCard(new Card("5","SPADE"));
+			hand.addCard(new Card("5","HEART"));
+			hand.addCard(new Card("5","DIAMOND"));
 			hand.addCard(new Card("8","SPADE"));
 			hand.addCard(new Card("6","CLUB"));
 			hand.addCard(new Card("6","HEART"));

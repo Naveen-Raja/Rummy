@@ -59,7 +59,7 @@ public class RummyHand extends Hand{
 	{	
 		for(String suit : sequenceInSuit.keySet()){
 			String result=subString(possibleSequence,sequenceInSuit.get(suit));
-			if(result.length()>=3)
+			if(result.length()>=2)
 				sequences.add(suit+" "+result);
 		}
 	}
@@ -160,16 +160,31 @@ public class RummyHand extends Hand{
 	   System.out.println(setOf2);
 	   System.out.println("Singles: ");
 	   System.out.println(single);
+	   
+	   //completeSets();
 	}
 
-	public int evaluate(){
+    public void assignJokers(Card Joker){
+    	ArrayList<Card> valuesToRemove=new ArrayList<Card>(); // To avoid ConcurrentModificationException
+    	for(Card c:cardsInHand){
+    		if(c.isSameValue(Joker)){
+    			valuesToRemove.add(c);
+    			availableJokers++;
+    		}
+    	}
+    	cardsInHand.removeAll(valuesToRemove);
+    }
+    
+	public int evaluate(Card joker){
+		assignJokers(joker);
 		sortCards();
 		convertToSequenceMap();
 		System.out.println(sequenceInSuit);
 		for(String s:sequences)
 			System.out.println(s);
 		convertToSet();
+		System.out.println("Joker Count: "+availableJokers);
 		return 0;
 	}
-
+	
 }
